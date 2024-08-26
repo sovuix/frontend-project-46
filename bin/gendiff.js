@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import getFileData from '../src/index.js';
+import compareKeys from '../src/compare.js';
 
 const program = new Command();
 
@@ -14,7 +15,7 @@ program
     const data1 = getFileData(filepath1);
     const data2 = getFileData(filepath2);
 
-    console.log(data1, data2);
+    console.log(compareKeys(data1, data2));
   });
 
 program.parse();
