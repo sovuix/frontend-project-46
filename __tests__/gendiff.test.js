@@ -9,8 +9,7 @@ const data1 = getFileData(fileJson1);
 const data2 = getFileData(fileJson2);
 
 const expectedFile = fs
-  .readFileSync('./__fixtures__/expected_JSON.txt', 'utf-8')
-  .replace(/\\n/g, '\n');
+  .readFileSync('./__fixtures__/expected_JSON.txt', 'utf-8');
 
 test('comparing files with nesting', () => {
   expect(compareKeys(data1, data2)).toEqual(expectedFile);
