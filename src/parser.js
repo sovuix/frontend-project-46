@@ -1,8 +1,3 @@
-// const parsers = {
-//   json: JSON.parse,
-// };
-
-// const parse = (data, format) => parsers[format](data);
 import yaml from 'js-yaml';
 
 const parse = (data, format) => {
@@ -18,7 +13,4 @@ const parse = (data, format) => {
   }
 }
 
-
-
 export default parse;
-// export default parse;
