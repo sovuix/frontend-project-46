@@ -2,6 +2,8 @@
 import { Command } from 'commander';
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
+import buildAst from '../src/buildAst.js';
+import compareAst from '../src/compareAst.js';
 
 const program = new Command();
 
@@ -15,7 +17,14 @@ program
     const data1 = getFileData(filepath1);
     const data2 = getFileData(filepath2);
 
-    console.log(compareKeys(data1, data2));
+    const ast = buildAst(data1, data2);
+
+    // const jsonString = JSON.stringify(ast, null, 2);
+    console.log(compareAst(ast));
+    
+    
+    
+    
   });
 
 program.parse();
