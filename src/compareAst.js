@@ -7,28 +7,43 @@
 
 // 
 
-const compareAst = (node) => {
-  const res = [];
-
-  const iter = (node, depth = 0) => {
-    const indent = '  '.repeat(depth); // Используем два пробела для отступа
-
-    if (node.type === 'added') {
-      res.push(`${indent}+ ${node.key}: ${node.value}`);
-    } else if (node.type === 'changed') {
-      res.push(`${indent}+ ${node.key}: ${node.newvalue}`);
-      res.push(`${indent}- ${node.key}: ${node.oldvalue}`); // Используем '-' для oldvalue
-    } else if (node.type === 'nested') {
-      res.push(`${indent}${node.key}: {`);
-      node.children.forEach(child => iter(child, depth + 1)); // Используем forEach для корректного добавления
-      res.push(`${indent}}`);
-    } else if (node.type === 'removed'){ // Добавлено обработка удаленных узлов
-        res.push(`${indent}- ${node.key}`)
-    }
-  };
-
-  iter(node); // Вызываем iter для корневого узла
-  return res
+const compareAst = (node) => { 
+  const res = []; 
+ 
+  const formatValue = (value) => { 
+    if (typeof value === 'object') { 
+      return JSON.stringify(value, null, 2); 
+    } 
+    return value; 
+  }; 
+ 
+  const iter = (node, depth = 0) => { 
+    const indent = '  '.repeat(depth); 
+ 
+    if (node.type === 'added') { 
+      res.push(`${indent}+ ${node.key}: ${formatValue(node.value)}`); 
+    } else if (node.type === 'changed') { 
+      res.push(`${indent}- ${node.key}: ${formatValue(node.oldValue)}`); 
+      res.push(`${indent}+ ${node.key}: ${formatValue(node.newValue)}`); 
+    } else if (node.type === 'nested') { 
+      res.push(`${indent}${node.key}: {`); 
+      node.children.map((child) => iter(child, depth + 2)); 
+      res.push(`${indent}}`); 
+    } else if (node.type === 'deleted') { 
+      res.push(`${indent}- ${node.key}`); 
+    } else if (node.type === 'notModified') { 
+      res.push(`${indent} ${node.key}: ${formatValue(node.value)}`); 
+    } 
+  }; 
+ 
+  if (node.type === 'root') { 
+    res.push(node.key); 
+    node.children.forEach((child) => iter(child, 0)); 
+  } else { 
+    iter(node, 0); 
+  } 
+   
+  return res.join('\n'); 
 };
 
 export default compareAst;
