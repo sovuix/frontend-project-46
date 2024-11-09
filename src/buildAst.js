@@ -13,12 +13,13 @@ const buildAst = (obj1, obj2) => {
       };
 
       if(!(key in obj2)) {
-        return {type: 'deleted', key, value: obj2[key]}
+        return {type: 'deleted', key, value: obj1[key]}
       };
 
       if(_.isObject(obj1[key]) && _.isObject(obj2[key])) {
         return {
-          type: 'nested', 
+          type: 'nested',
+          key, 
           children: iter(obj1[key], obj2[key])
         };
       };
