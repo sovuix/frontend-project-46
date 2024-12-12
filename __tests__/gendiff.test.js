@@ -16,8 +16,12 @@ const data2Yaml = getFileData(fileYaml2);
 const expectedFile = fs
   .readFileSync('./__fixtures__/expected_JSON.txt', 'utf-8');
 
-test('comparing files with nesting', () => {
-  expect(compareKeys(data1Json,data2Json)).toEqual(expectedFile);
-  expect(compareKeys(data1Yaml,data2Yaml)).toEqual(expectedFile);
+// test('comparing files with nesting', () => {
+//   expect(compareKeys(data1Json,data2Json)).toEqual(expectedFile);
+//   expect(compareKeys(data1Yaml,data2Yaml)).toEqual(expectedFile);
+// });
 
+test('comparing files with nesting', () => {
+  expect(compareAst(data1Json,data2Json)).toEqual(expectedFile);
+  expect(compareAst(data1Yaml,data2Yaml)).toEqual(expectedFile);
 });

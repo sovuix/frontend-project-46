@@ -14,4 +14,6 @@ const getFileData = (filepath) => {
   return data;
 };
 
+// const gendiff ()
+
 export default getFileData;
