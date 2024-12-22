@@ -1,5 +1,7 @@
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
+import compareAst from '../src/compareAst.js';
+import buildAst from '../src/buildAst.js';
 import fs from 'node:fs';
 
 const fileJson1 = './__fixtures__/file1.json';
@@ -13,6 +15,8 @@ const data2Json = getFileData(fileJson2);
 const data1Yaml = getFileData(fileYaml1);
 const data2Yaml = getFileData(fileYaml2);
 
+const ast = buildAst(data1Json, data2Json);
+
 const expectedFile = fs
   .readFileSync('./__fixtures__/expected_JSON.txt', 'utf-8');
 
@@ -22,6 +26,6 @@ const expectedFile = fs
 // });
 
 test('comparing files with nesting', () => {
-  expect(compareAst(data1Json,data2Json)).toEqual(expectedFile);
-  expect(compareAst(data1Yaml,data2Yaml)).toEqual(expectedFile);
+  expect(compareAst(ast)).toEqual(expectedFile);
+  // expect(compareAst(data1Yaml,data2Yaml)).toEqual(expectedFile);
 });

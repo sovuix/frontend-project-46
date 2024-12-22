@@ -4,6 +4,7 @@ import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
 import buildAst from '../src/buildAst.js';
 import compareAst from '../src/compareAst.js';
+import plain from '../formatters/plain.js';
 
 const program = new Command();
 
@@ -19,8 +20,9 @@ program
 
     const ast = buildAst(data1, data2);
 
-    // const jsonString = JSON.stringify(ast, null, 2);
     console.log(compareAst(ast));
+    // console.log(plain(ast));
+    
     
     
     
