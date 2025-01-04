@@ -1,37 +1,49 @@
-const formatValue = (value) => {
-    if (typeof value === "object" && value !== null) {
-        const entries = Object.entries(value).map(([key, val]) => {
-            return `${key}: ${formatValue(val)}`;
-        });
-        return `{\n${entries.join('\n')}\n}`;
+const plain = (node) => {
+  const formatValue = (value) => {
+    if (value === null) {
+      return 'null';
     }
     if (typeof value === 'string') {
-        return `"${value}"`; 
+      return `'${value}'`;
+    }
+    if (typeof value === 'object') {
+      return '[complex value]';
     }
     return String(value);
-};
+  };
 
-const plain = (node) => {
-    const iter = (node) => {
-        const { type, key, value, children } = node;
-        if (type === 'added') {
-            return [`Property '${key}' was added with value: ${formatValue(value)}`];
-        }
-        if (type === 'removed') {
-            return [`Property '${key}' was removed`];
-        }
-        if (type === 'changed') {
-            return [`Property '${key}' was changed from ${formatValue(value.old)} to ${formatValue(value.new)}`];
-        }
-        if (type === 'nested') {
-            return [`Property '${key}': ${iter(children).join('\n')}`];
-        }
-        return [];
-    };
+  const iter = (node, path = []) => {
+    const { type } = node;
+    const fullPath = [...path, node.key].join('.');
 
-    if (node.type === 'root') {
-        return `{\n${node.children.flatMap((child) => iter(child)).join('\n')}\n}`;
+    switch (type) {
+      case 'added':
+        return `Property '${fullPath}' was added with value: ${formatValue(node.value)}`;
+      case 'deleted':
+        return `Property '${fullPath}' was removed`;
+      case 'changed':
+        return `Property '${fullPath}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`;
+      case 'nested':
+        return node.children
+          .map((child) => iter(child, [...path, node.key]))
+          .filter(Boolean)
+          .join('\n');
+      case 'notModified':
+        return '';
+      default:
+        return '';
     }
+  };
+
+  if (node.type === 'root') {
+    return node.children
+      .map((child) => iter(child, []))
+      .filter(Boolean)
+      .join('\n');
+  }
+
+  return '';
 };
+
 
 export default plain;

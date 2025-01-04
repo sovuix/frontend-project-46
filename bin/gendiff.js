@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
 import buildAst from '../src/buildAst.js';
-import compareAst from '../src/compareAst.js';
+import compareAst from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
 
 const program = new Command();
@@ -20,8 +20,8 @@ program
 
     const ast = buildAst(data1, data2);
 
-    console.log(compareAst(ast));
-    // console.log(plain(ast));
+    // console.log(compareAst(ast));
+    console.log(plain(ast));
     
     
     
