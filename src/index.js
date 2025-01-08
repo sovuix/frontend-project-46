@@ -14,6 +14,12 @@ const getFileData = (filepath) => {
   return data;
 };
 
-// const gendiff ()
+// const gendiff = (filepath1, filepath2, formatName)
+// {
+//   //1. получить абсолютные пути до файла
+//   //2. прочитать и спарсить json
+//   //3. построение AST
+//   //4.
+// }
 
 export default getFileData;
