@@ -5,6 +5,7 @@ import compareKeys from '../src/compare.js';
 import buildAst from '../src/buildAst.js';
 import compareAst from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
+import gendiff from '../src/index.js';
 
 const program = new Command();
 
@@ -13,20 +14,10 @@ program
   .description('Compares two configuration files and shows a difference.')
   .helpOption('-h, --help', 'output usage information')
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format [type]', 'output format')
-  .action((filepath1, filepath2) => {
-    const data1 = getFileData(filepath1);
-    const data2 = getFileData(filepath2);
-
-    const ast = buildAst(data1, data2);
-
-    // console.log(compareAst(ast));
-    console.log(plain(ast));
-    
-    
-    
-    
-    
+  .option('-f, --format [type]', 'output format','stylish')
+  .action((filepath1, filepath2, options) => {
+    const res = gendiff(filepath1, filepath2, options.format);  
+    console.log(res);
   });
 
 program.parse();
