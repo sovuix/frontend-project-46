@@ -1,6 +1,6 @@
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
-import compareAst from '../formatters/stylish.js';
+import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
 import buildAst from '../src/buildAst.js';
 import fs from 'node:fs';
@@ -26,7 +26,7 @@ const expectedFilePlain = fs
 
 
 test('comparing files with nesting', () => {
-  expect(compareAst(ast)).toEqual(expectedFileStylish);
+  expect(stylish(ast)).toEqual(expectedFileStylish);
   expect(plain(ast)).toEqual(expectedFilePlain);
 
   // expect(compareAst(data1Yaml,data2Yaml)).toEqual(expectedFile);

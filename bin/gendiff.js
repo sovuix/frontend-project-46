@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
 import buildAst from '../src/buildAst.js';
-import compareAst from '../formatters/stylish.js';
+import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
 import gendiff from '../src/index.js';
 

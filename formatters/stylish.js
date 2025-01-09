@@ -1,5 +1,5 @@
 
-const compareAst = (node) => {
+const stylish = (node) => {
   const indent = (depth) => '    '.repeat(depth);
   const formatValue = (value, depth = 0) => {
     if (typeof value === "object" && value !== null) {
@@ -46,4 +46,4 @@ const compareAst = (node) => {
 };
 
 
-export default compareAst;
+export default stylish;
