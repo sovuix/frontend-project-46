@@ -5,6 +5,7 @@ import parse from './parser.js';
 import buildAst from './buildAst.js';
 import plain from './formatters/plain.js';
 import stylish from './formatters/stylish.js';
+import { json } from 'node:stream/consumers';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const getFileFormat = (filepath) => path.extname(filepath).slice(1);
@@ -18,6 +19,8 @@ const getFileData = (filepath) => {
 
 const format = (ast, formatName) => {
   switch(formatName) {
+    case 'json':
+      return JSON.stringify(ast, null, 2);
     case 'stylish':
       return stylish(ast);
     case 'plain': 
