@@ -1,7 +1,7 @@
 import getFileData from '../src/index.js';
 import compareKeys from '../src/compare.js';
-import stylish from '../formatters/stylish.js';
-import plain from '../formatters/plain.js';
+import stylish from '../src/formatters/stylish.js';
+import plain from '../src/formatters/plain.js';
 import buildAst from '../src/buildAst.js';
 import fs from 'node:fs';
 

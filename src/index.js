@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import _ from 'lodash';
 import parse from './parser.js';
 import buildAst from './buildAst.js';
-import plain from '../formatters/plain.js';
-import stylish from '../formatters/stylish.js';
+import plain from './formatters/plain.js';
+import stylish from './formatters/stylish.js';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const getFileFormat = (filepath) => path.extname(filepath).slice(1);
