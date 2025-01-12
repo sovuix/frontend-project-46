@@ -1,17 +1,17 @@
-const plain = (node) => {
-  const formatValue = (value) => {
-    if (value === null) {
-      return 'null';
-    }
-    if (typeof value === 'string') {
-      return `'${value}'`;
-    }
-    if (typeof value === 'object') {
-      return '[complex value]';
-    }
-    return String(value);
-  };
+const formatValue = (value) => {
+  if (value === null) {
+    return 'null';
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  if (typeof value === 'object') {
+    return '[complex value]';
+  }
+  return String(value);
+};
 
+const plain = (node) => {
   const iter = (node, path = []) => {
     const { type } = node;
     const fullPath = [...path, node.key].join('.');
