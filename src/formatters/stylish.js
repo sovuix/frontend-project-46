@@ -1,6 +1,6 @@
+const indent = (depth) => '    '.repeat(depth);
 
 const stylish = (node) => {
-  const indent = (depth) => '    '.repeat(depth);
   const formatValue = (value, depth = 0) => {
     if (typeof value === "object" && value !== null) {
       const entries = Object.entries(value).map(([key, val]) => {
@@ -15,9 +15,6 @@ const stylish = (node) => {
   }
 
   const iter = (node, depth = 0) => {
-    // const indent = (depth, count = 0) => '    '.repeat(depth);
-    const indent = (depth) => '    '.repeat(depth);
-
     const { type } = node;
 
     if (type === 'added') {
