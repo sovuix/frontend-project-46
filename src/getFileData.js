@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import parse from './parser.js';
+import process from 'node:process';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const getFileFormat = (filepath) => path.extname(filepath).slice(1);
