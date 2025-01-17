@@ -12,7 +12,7 @@ const formatValue = (value) => {
 };
 
 const plain = (node) => {
-  const iter = (node, path = []) => {
+  const iter = (nodePath, path = []) => {
     const { type } = node;
     const fullPath = [...path, node.key].join('.');
 
@@ -44,6 +44,5 @@ const plain = (node) => {
 
   return '';
 };
-
 
 export default plain;
