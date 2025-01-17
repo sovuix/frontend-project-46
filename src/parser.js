@@ -11,6 +11,6 @@ const parse = (data, format) => {
     default:
       throw new Error('Unknown file extension!');
   }
-}
+};
 
 export default parse;
