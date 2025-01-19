@@ -5,9 +5,7 @@ const buildAst = (object1, object2) => {
   const iter = (obj1, obj2) => {
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
-    const uniqueKeys = Array.from(new Set([...keys1, ...keys2]))
-      .slice()
-      .sort((a, b) => a.localeCompare(b));
+    const uniqueKeys = Array.from(new Set([...keys1, ...keys2])).toSorted();
 
     const res = uniqueKeys.map((key) => {
       if (!(key in obj1)) {
@@ -43,5 +41,4 @@ const buildAst = (object1, object2) => {
     children: iter(object1, object2),
   };
 };
-
 export default buildAst;
