@@ -11,8 +11,8 @@ const formatValue = (value) => {
   return String(value);
 };
 
-const plain = (node) => {
-  const iter = (nodePath, path = []) => {
+const plain = (nodeTree) => {
+  const iter = (node, path = []) => {
     const { type } = node;
     const fullPath = [...path, node.key].join('.');
 
@@ -35,8 +35,8 @@ const plain = (node) => {
     }
   };
 
-  if (node.type === 'root') {
-    return node.children
+  if (nodeTree.type === 'root') {
+    return nodeTree.children
       .map((child) => iter(child, []))
       .filter(Boolean)
       .join('\n');
