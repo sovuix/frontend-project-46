@@ -13,6 +13,11 @@ const expectedFilePlain = fs.readFileSync(
   'utf-8',
 );
 
+const expectedFileJSON = fs.readFileSync(
+  './__fixtures__/filejson.json',
+  'utf-8',
+);
+
 const resultPath = (filename) => path.join(process.cwd(), '__fixtures__', filename);
 
 describe('gendiff', () => {
@@ -32,5 +37,14 @@ describe('gendiff', () => {
       'plain',
     );
     expect(result.trim()).toEqual(expectedFilePlain);
+  });
+
+  test('json', () => {
+    const result = gendiff(
+      resultPath('file1.json'),
+      resultPath('file2.json'),
+      'json',
+    );
+    expect(result.trim()).toEqual(expectedFileJSON);
   });
 });
