@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import buildAst from './buildAst.js';
 import format from './formatters/index.js';
 import getFileData from './getFileData.js';

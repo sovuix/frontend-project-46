@@ -1,4 +1,3 @@
-// import { isObject } from "lodash";
 import _ from 'lodash';
 
 const buildAst = (object1, object2) => {
