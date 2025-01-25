@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const compareKeys = (obj1, obj2) => {
   const keys1 = _.sortBy(Object.keys(obj1));
   const keys2 = _.sortBy(Object.keys(obj2));
